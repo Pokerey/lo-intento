@@ -1,11 +1,11 @@
 {
   "id": 1,
   "nombre": "Albanix",
-  "tipo": ["Fuego", "Hielo"],
+  "tipo": ["Fuego", "Volador"],
   "descripcion": "Un Pokémon majestuoso que surge de la lava ardiente. Representa el renacer y la fortaleza.",
   "altura": "2.3 m",
   "peso": "178 kg",
-  "habitat": "Cumbres nevadas",
+  "habitat": "Zonas volcanicas",
   "habilidades": ["Pirocristal", "Foco Interno"],
   "evolucion": null,
   "imagen": "sprites/albanix.png"
