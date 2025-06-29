@@ -1,78 +1,9 @@
 Def.-Pokedex-uru/
 ├── index.html
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Urupokedex</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>🌟 Bienvenido a la Urupokedex</h1>
-  <div id="contenido">Cargando Pokémon...</div>
-  <script src="scripts/main.js"></script>
-</body>
-</html>
-
 ├── style.css
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #fafafa;
-  color: #333;
-  padding: 2rem;
-  text-align: center;
-}
-
-h1 {
-  color: #d32f2f;
-  margin-bottom: 2rem;
-}
-
-img {
-  margin-top: 1rem;
-  border-radius: 8px;
-}
-
 ├── scripts/
 │   └── main.js
-fetch("pokedex/albanix.json")
-  .then(response => {
-    if (!response.ok) throw new Error("No se pudo cargar el archivo JSON");
-    return response.json();
-  })
-  .then(pokemon => {
-    const contenedor = document.getElementById("contenido");
-    contenedor.innerHTML = `
-      <h2>${pokemon.nombre} (#${pokemon.id})</h2>
-      <p><strong>Tipo:</strong> ${pokemon.tipo.join(" / ")}</p>
-      <p><strong>Descripción:</strong> ${pokemon.descripcion}</p>
-      <p><strong>Altura:</strong> ${pokemon.altura}</p>
-      <p><strong>Peso:</strong> ${pokemon.peso}</p>
-      <p><strong>Hábitat:</strong> ${pokemon.habitat}</p>
-      <p><strong>Habilidades:</strong> ${pokemon.habilidades.join(", ")}</p>
-      <img src="${pokemon.imagen}" alt="${pokemon.nombre}" width="200" />
-    `;
-  })
-  .catch(error => {
-    document.getElementById("contenido").innerText = "Error al cargar los datos del Pokémon.";
-    console.error(error);
-  });
-
 ├── pokedex/
 │   └── albanix.json
-{
-  "id": 1,
-  "nombre": "Albanix",
-  "tipo": ["Fuego", "Hielo"],
-  "descripcion": "Un Pokémon majestuoso que surge de la nieve ardiente. Representa el renacer y la fortaleza.",
-  "altura": "2.3 m",
-  "peso": "178 kg",
-  "habitat": "Cumbres nevadas",
-  "habilidades": ["Pirocristal", "Foco Interno"],
-  "evolucion": null,
-  "imagen": "sprites/albanix.png"
-}
-
 ├── sprites/
-│   └── albanix.png
+│   └── albanix.png (pendiente que lo subas)
