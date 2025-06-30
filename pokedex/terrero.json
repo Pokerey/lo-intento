@@ -1,0 +1,13 @@
+// pokedex/terrero.json
+{
+  "id": 3,
+  "nombre": "Terrero",
+  "tipo": ["Fuego", "Volador"],
+  "descripcion": "Pequeño pero valiente, Terrero anida en los pastizales de los campos uruguayos. Su penacho anaranjado brilla al amanecer, avisando a su bandada de que el día ha comenzado. Cuando se siente amenazado, agita sus alas y expulsa pequeñas llamaradas desde su cresta, intimidando a depredadores con su ardor inusitado. Evoluciona a Ignívalo al nivel 16.",
+  "altura": "0.7 m",
+  "peso": "12 kg",
+  "habitat": "Plazas de Uruguay",
+  "habilidades": ["Alarma Ígnea", "Espíritu Gaucho"],
+  "evolucion": "ignivalo.json",
+  "imagen": "sprites/terrero.png"
+}
