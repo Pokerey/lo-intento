@@ -1,0 +1,13 @@
+
+{
+  "id": 4,
+  "nombre": "Ignívalo",
+  "tipo": ["Fuego", "Volador"],
+  "descripcion": "Ignívalo emerge cuando Terrero libera todo su potencial ígneo. Su cuerpo serpentea entre llamas, simbolizando la fusión del fuego y la libertad. Se dice que, al batir sus poderosas alas, convoca pequeños incendios que purifican el aire y renuevan la tierra. Evoluciona a Albanix al nivel 36",
+  "altura": "1.8 m",
+  "peso": "18 kg",
+  "habitat": "Cráteres volcánicos",
+  "habilidades": ["Llama Embravecida", "Escama Férrea"],
+  "evolucion": "albanix",
+  "imagen": "sprites/ignivalo.png"
+}
