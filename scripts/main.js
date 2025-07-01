@@ -2,7 +2,6 @@ fetch('pokedex/datos-pokedex.json')
   .then(res => res.json())
   .then(pokemones => {
     console.log(pokemones);
-    // Acá podés agregar código para mostrarlos en pantalla
   })
   .catch(err => {
     console.error("Error al cargar los datos de los Pokémon :p", err);
