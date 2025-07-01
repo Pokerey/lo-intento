@@ -2,7 +2,7 @@ fetch('pokedex/datos-pokedex.json')
   .then(res => res.json())
   .then(pokemones => {
     const contenedor = document.getElementById("contenido");
-    contenedor.innerHTML = ''; // limpiar por si hay contenido previo
+    contenedor.innerHTML = '';
 
     pokemones.forEach(pokemon => {
       const tarjeta = document.createElement("div");
