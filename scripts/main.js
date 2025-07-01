@@ -1,8 +1,12 @@
-fetch("pokedex/albanix.json")
-  .then(response => {
-    if (!response.ok) throw new Error("No se pudo cargar el archivo JSON");
-    return response.json();
+fetch('pokedex/datos-pokedex.json')
+  .then(res => res.json())
+  .then(pokemones => {
+    console.log(pokemones);
+    // Acá podés agregar código para mostrarlos en pantalla
   })
+  .catch(err => {
+    console.error("Error al cargar los datos de los Pokémon", err);
+  });
   .then(pokemon => {
     const contenedor = document.getElementById("contenido");
     contenedor.innerHTML = `
