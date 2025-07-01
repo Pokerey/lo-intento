@@ -1,5 +1,41 @@
 [
   {
+  "id": 1,
+  "nombre": "Capihoja",
+  "tipo": ["Planta"],
+  "descripcion": "Pequeño y curioso, Capihoja recorre los campos con una hoja en forma de boina que le protege del sol y canaliza energía solar. Suele acercarse a los humanos confiados, especialmente en las plazas y huertas donde la vegetación es abundante. Su dulzura lo hace muy popular como compañero inicial.",
+  "altura": "0.5 m",
+  "peso": "5.5 kg",
+  "habitat": "Zonas rurales y jardines urbanos",
+  "habilidades": ["Clorofila", "Savia Serena"],
+  "evolucion": "Carpinflo",
+  "imagen": "sprites/capihoja.png"
+},
+  {
+  "id": 2,
+  "nombre": "Carpinflo",
+  "tipo": ["Planta"],
+  "descripcion": "Tras evolucionar, Capihoja se transforma en Carpinflo, una criatura amistosa que genera pequeñas flores silvestres a su paso. Su personalidad cálida y protectora lo hace un líder natural entre Pokémon de pradera. Se lo ha visto colaborando con agricultores, ayudando a que la tierra florezca.",
+  "altura": "0.9 m",
+  "peso": "45 kg",
+  "habitat": "Campos abiertos y bordes de monte",
+  "habilidades": ["Espora Viva", "Savia Serena"],
+  "evolucion": "Brotibara",
+  "imagen": "sprites/carpinflo.png"
+},
+  {
+  "id": 3,
+  "nombre": "Brotibara",
+  "tipo": ["Planta", "Tierra"],
+  "descripcion": "Brotibara representa la armonía entre la tierra fértil y la vida silvestre. Sus enredaderas se entrelazan con el entorno, purificando el aire y revitalizando los suelos por donde pisa. Es considerado un espíritu protector de los humedales y actúa como guía silencioso de otras criaturas del ecosistema.",
+  "altura": "1.8 m",
+  "peso": "176 kg",
+  "habitat": "Humedales y reservas naturales",
+  "habilidades": ["Raíz Profunda", "Corazón Silvestre"],
+  "evolucion": null,
+  "imagen": "sprites/brotibara.png"
+},
+   {
     "id": 9,
     "nombre": "Terrero",
     "tipo": ["Fuego", "Volador"],
