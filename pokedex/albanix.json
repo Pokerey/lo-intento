@@ -6,7 +6,7 @@
   "altura": "2.3 m",
   "peso": "128 kg",
   "habitat": "Zonas volcanicas",
-  "habilidades": ["Pirocristal", "Foco Interno"],
+  "habilidades": ["Pirocristal"/ "Foco Interno"],
   "evolucion": null,
   "imagen": "sprites/albanix.png"
 }
