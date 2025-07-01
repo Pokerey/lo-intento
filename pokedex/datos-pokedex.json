@@ -50,7 +50,7 @@
   {
   "id": 5,
   "nombre": "Sonatlón",
-  "tipo": ["Agua", "Hada"],
+  "tipo": ["Agua"],
   "descripcion": "Sonatlón domina las mareas no solo con su fuerza, sino con su canto majestuoso. Sus vocalizaciones generan ondas que pueden calmar tormentas o desatar tsunamis. Se dice que su canto solo se escucha durante las noches de luna llena, guiando a los marineros perdidos.",
   "altura": "1 m",
   "peso": "45 kg",
@@ -62,7 +62,7 @@
   {
   "id": 6,
   "nombre": "Brumalión",
-  "tipo": ["Hielo", "Fantasma"],
+  "tipo": ["Agua", "Fantasma"],
   "descripcion": "Brumalión emerge de las regiones más gélidas durante épocas de caos climático. Su rugido resuena entre montañas nevadas, trayendo calma a tormentas y esperanza a viajeros perdidos. Cuentan las leyendas que su melena helada lleva memorias de héroes ancestrales, y que el brillo de su colgante guía a los corazones puros.",
   "altura": "2.4 m",
   "peso": "110 kg",
