@@ -18,4 +18,14 @@ img {
 body {
   background: linear-gradient(to bottom, #ff7043, #ffe0b2 40%, #bbdefb 100%);
 }
-
+.tarjeta-pokemon {
+  background-color: #fff8f0;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
