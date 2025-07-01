@@ -74,3 +74,11 @@ h1 {
   font-size: 1.1rem;
 }
 
+/* 📄 Contenedor de ficha debajo de la línea */
+.ficha-evolutiva {
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
