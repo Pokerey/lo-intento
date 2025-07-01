@@ -4,6 +4,6 @@ Def.-Pokedex-uru/
 ├── scripts/
 │   └── main.js
 ├── pokedex/
-│   └── albanix.json
+│   └── datos-pokedex.json
 ├── sprites/
 │   └── albanix.png (pendiente que lo subas)
