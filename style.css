@@ -4,17 +4,55 @@ body {
   color: #333;
   padding: 2rem;
   text-align: center;
+  margin: 0;
 }
+
+.hidden {
+  display: none;
+}
+
+#splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffe0b2, #bbdefb);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+
+#splash-logo {
+  width: 180px;
+  margin-bottom: 1rem;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
 h1 {
   color: #d32f2f;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
-/* Imágenes generales dentro de fichas */
-.tarjeta-pokemon img {
-  margin-top: 1rem;
-  border-radius: 8px;
+
+h2 {
+  margin-top: 2rem;
+  color: #555;
 }
-/* 🃏 FICHA POKÉMON */
+
 .tarjeta-pokemon {
   background-color: #fff8f0;
   border: 2px solid #ccc;
@@ -25,22 +63,25 @@ h1 {
   max-width: 500px;
 }
 
-/* 📦 Línea evolutiva: contenedor */
+.tarjeta-pokemon img {
+  margin-top: 1rem;
+  border-radius: 8px;
+  width: 200px;
+}
+
 .linea-evolutiva {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 2rem 0;
+  margin: 1.5rem 0;
   flex-wrap: wrap;
 }
 
-/* 🔁 Elemento de cada etapa */
 .etapa {
   text-align: center;
   margin: 0 1rem;
 }
 
-/* 🌱 Imagen de cada Pokémon en línea */
 .etapa img {
   width: 90px;
   height: auto;
@@ -50,27 +91,16 @@ h1 {
   transition: transform 0.2s ease;
 }
 
-/* ✨ Efecto al pasar el mouse sobre imagen */
 .etapa img:hover {
   transform: scale(1.1);
 }
 
-/* ➡️ Flechas entre etapas */
 .flecha {
   font-size: 2rem;
   color: #555;
   margin: 0 0.5rem;
 }
 
-/* 📨 Mensaje inicial */
-.mensaje-inicial p {
-  font-style: italic;
-  opacity: 0.7;
-  margin-top: 1rem;
-  font-size: 1.1rem;
-}
-
-/* 📄 Contenedor de ficha debajo de la línea */
 .ficha-evolutiva {
   margin-top: 1rem;
   margin-bottom: 3rem;
@@ -78,3 +108,9 @@ h1 {
   justify-content: center;
 }
 
+#contenido {
+  font-style: italic;
+  opacity: 0.7;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
