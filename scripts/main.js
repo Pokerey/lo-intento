@@ -1,112 +1,81 @@
-window.addEventListener("load", () => {
-  const splash = document.getElementById("splash");
-  const mainContent = document.getElementById("main-content");
-
-  // Después de 1,5s hacemos fade-out y mostramos el main
-  setTimeout(() => {
-    splash.classList.add("fade-out");
-    splash.addEventListener("transitionend", () => {
-      splash.style.display = "none";
-      mainContent.classList.remove("hidden");
-    });
-  }, 1500);
-});
-splash.addEventListener("click", () => {
-  splash.classList.add("fade-out");
-  splash.addEventListener("transitionend", () => {
-    splash.style.display = "none";
-    mainContent.classList.remove("hidden");
-  });
-});
-
-
+// 1) Referencias globales
+const splash       = document.getElementById("splash");
+const mainContent  = document.getElementById("main-content");
+const searchInput  = document.getElementById("search-input");
 let datosPokemones = [];
 
-fetch('pokedex/datos-pokedex.json')
+// 2) Función para ocultar el splash y mostrar el main
+function dismissSplash() {
+  splash.classList.add("fade-out");
+  splash.addEventListener("transitionend", () => {
+    splash.style.display     = "none";
+    mainContent.classList.remove("hidden");
+  }, { once: true });
+}
+
+// 3) Splash: timer + clic  
+window.addEventListener("load", () => {
+  setTimeout(dismissSplash, 1500);
+});
+splash.addEventListener("click", dismissSplash);
+
+// 4) Carga y renderizado inicial de Pokémon  
+fetch("pokedex/datos-pokedex.json")
   .then(res => res.json())
   .then(pokemones => {
-    datosPokemones = pokemones;       
-    const contenedor = document.getElementById("contenido");
-    contenedor.innerHTML = '';                         
-    pokemones.forEach(pokemon => {
-      const tarjeta = document.createElement("div");
-      tarjeta.classList.add("tarjeta-pokemon");
-      tarjeta.innerHTML = `
-        <h2>${pokemon.nombre} (#${pokemon.id})</h2>
-        <p><strong>Tipo:</strong> ${pokemon.tipo.join(" / ")}</p>
-        <p><strong>Descripción:</strong> ${pokemon.descripcion}</p>
-        <p><strong>Altura:</strong> ${pokemon.altura}</p>
-        <p><strong>Peso:</strong> ${pokemon.peso}</p>
-        <p><strong>Hábitat:</strong> ${pokemon.habitat}</p>
-        <p><strong>Habilidades:</strong> ${pokemon.habilidades.join(", ")}</p>
-        <img src="${pokemon.imagen}" alt="${pokemon.nombre}">
-      `;
-      contenedor.appendChild(tarjeta);
-    });
-const searchInput = document.getElementById("search-input");
+    datosPokemones = pokemones;
+    renderizarTarjetas(datosPokemones);
+  })
+  .catch(err => {
+    console.error("Error al cargar datos:", err);
+    document.getElementById("contenido")
+            .innerText = "Error al cargar los datos del Pokédex.";
+  });
 
+// 5) Búsqueda en tiempo real  
 searchInput.addEventListener("input", () => {
-  const query = searchInput.value.toLowerCase().trim();
+  const q = searchInput.value.toLowerCase().trim();
   const resultados = datosPokemones.filter(poke => {
-    const nameMatch = poke.nombre.toLowerCase().includes(query);
-    const typeMatch = poke.tipo.some(t => t.toLowerCase().includes(query));
-    return nameMatch || typeMatch;
+    return poke.nombre.toLowerCase().includes(q)
+        || poke.tipo.some(t => t.toLowerCase().includes(q));
   });
   renderizarTarjetas(resultados);
 });
 
+// 6) Función de renderizado unificada  
 function renderizarTarjetas(lista) {
   const cont = document.getElementById("contenido");
-  cont.innerHTML = "";
-  if (lista.length === 0) {
-    cont.innerHTML = `<p>No se encontraron Pokémon para "${searchInput.value}".</p>`;
-    return;
-  }
-  lista.forEach(pokemon => {
-    const tarjeta = document.createElement("div");
-    tarjeta.classList.add("tarjeta-pokemon");
-    tarjeta.innerHTML = `
-      <h2>${pokemon.nombre} (#${pokemon.id})</h2>
-      <p><strong>Tipo:</strong> ${pokemon.tipo.join(" / ")}</p>
-      <p><strong>Descripción:</strong> ${pokemon.descripcion}</p>
-      <img src="${pokemon.imagen}" alt="${pokemon.nombre}">
-    `;
-    cont.appendChild(tarjeta);
-  });
+  cont.innerHTML = lista.length
+    ? lista.map(pokemon => `
+        <div class="tarjeta-pokemon">
+          <h2>${pokemon.nombre} (#${pokemon.id})</h2>
+          <p><strong>Tipo:</strong> ${pokemon.tipo.join(" / ")}</p>
+          <p>${pokemon.descripcion}</p>
+          <img src="${pokemon.imagen}" alt="${pokemon.nombre}">
+        </div>
+      `).join("")
+    : `<p>No se encontraron Pokémon para "${searchInput.value}".</p>`;
 }
 
-  })
-  .catch(error => {
-    console.error("Error al cargar los datos:", error);
-    document.getElementById("contenido")
-      .innerText = "Error al cargar los datos del Pokédex.";
-  });
+// 7) Click en línea evolutiva  
+document.addEventListener("click", e => {
+  const etapa = e.target.closest(".etapa");
+  if (!etapa || !etapa.dataset.id) return;
 
+  const id        = +etapa.dataset.id;
+  const pokemon   = datosPokemones.find(p => p.id === id);
+  if (!pokemon)   return;
 
-document.addEventListener("click", function (e) {
-  const etapaClickeada = e.target.closest(".etapa");
-  if (!etapaClickeada || !etapaClickeada.dataset.id) return;
+  const linea     = etapa.closest(".linea-evolutiva");
+  const fichaName = linea.dataset.linea;
+  const fichaCont = document
+    .querySelector(`.ficha-evolutiva[data-ficha="${fichaName}"]`);
 
-  const id = parseInt(etapaClickeada.dataset.id, 10);
-  const pokemon = datosPokemones.find(p => p.id === id);
-  if (!pokemon) return;
-
- 
-  const linea = etapaClickeada.closest(".linea-evolutiva");
-  const nombreLinea = linea.dataset.linea;
-  const contenedorFicha = document.querySelector(
-    `.ficha-evolutiva[data-ficha="${nombreLinea}"]`
-  );
-
-  contenedorFicha.innerHTML = `
+  fichaCont.innerHTML = `
     <div class="tarjeta-pokemon">
       <h2>${pokemon.nombre} (#${pokemon.id})</h2>
       <p><strong>Tipo:</strong> ${pokemon.tipo.join(" / ")}</p>
-      <p><strong>Descripción:</strong> ${pokemon.descripcion}</p>
-      <p><strong>Altura:</strong> ${pokemon.altura}</p>
-      <p><strong>Peso:</strong> ${pokemon.peso}</p>
-      <p><strong>Hábitat:</strong> ${pokemon.habitat}</p>
-      <p><strong>Habilidades:</strong> ${pokemon.habilidades.join(", ")}</p>
+      <p>${pokemon.descripcion}</p>
       <img src="${pokemon.imagen}" alt="${pokemon.nombre}">
     </div>
   `;
