@@ -5,19 +5,15 @@ body {
   padding: 2rem;
   text-align: center;
 }
-
-
 h1 {
   color: #d32f2f;
   margin-bottom: 2rem;
 }
-
 /* Imágenes generales dentro de fichas */
 .tarjeta-pokemon img {
   margin-top: 1rem;
   border-radius: 8px;
 }
-
 /* 🃏 FICHA POKÉMON */
 .tarjeta-pokemon {
   background-color: #fff8f0;
