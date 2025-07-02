@@ -11,6 +11,14 @@ window.addEventListener("load", () => {
     });
   }, 1500);
 });
+splash.addEventListener("click", () => {
+  splash.classList.add("fade-out");
+  splash.addEventListener("transitionend", () => {
+    splash.style.display = "none";
+    mainContent.classList.remove("hidden");
+  });
+});
+
 
 let datosPokemones = [];
 
