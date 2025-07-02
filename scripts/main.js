@@ -1,9 +1,10 @@
-// Cargar datos del Pokédex y mostrar todas las fichas
+let datosPokemones = []; 
 fetch('pokedex/datos-pokedex.json')
   .then(res => res.json())
   .then(pokemones => {
+    datosPokemones = pokemones;
     const contenedor = document.getElementById("contenido");
-    contenedor.innerHTML = ''; // Limpiar contenido
+    contenedor.innerHTML = ''; 
     pokemones.forEach(pokemon => {
       const tarjeta = document.createElement("div");
       tarjeta.classList.add("tarjeta-pokemon");
@@ -18,7 +19,8 @@ fetch('pokedex/datos-pokedex.json')
         <img src="${pokemon.imagen}" alt="${pokemon.nombre}" width="200" />
       `;
       contenedor.appendChild(tarjeta);
-    });
+       });
+    })
   .catch(error => {
     console.error("Error al cargar los datos de los Pokémon:", error);
     document.getElementById("contenido").innerText = "Error al cargar los datos del Pokédex.";
