@@ -17,7 +17,14 @@ let datosPokemones = [];
 fetch('pokedex/datos-pokedex.json')
   .then(res => res.json())
   .then(pokemones => {
-    datosPokemones = pokemones;                       
+    datosPokemones = pokemones;       
+    <div class="buscador">
+  <input
+    type="text"
+    id="search-input"
+    placeholder="Buscar Pokémon por nombre o tipo..."
+  />
+</div>
     const contenedor = document.getElementById("contenido");
     contenedor.innerHTML = '';                         
     pokemones.forEach(pokemon => {
