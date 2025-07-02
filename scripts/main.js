@@ -18,13 +18,6 @@ fetch('pokedex/datos-pokedex.json')
   .then(res => res.json())
   .then(pokemones => {
     datosPokemones = pokemones;       
-    <div class="buscador">
-  <input
-    type="text"
-    id="search-input"
-    placeholder="Buscar Pokémon por nombre o tipo..."
-  />
-</div>
     const contenedor = document.getElementById("contenido");
     contenedor.innerHTML = '';                         
     pokemones.forEach(pokemon => {
@@ -42,6 +35,38 @@ fetch('pokedex/datos-pokedex.json')
       `;
       contenedor.appendChild(tarjeta);
     });
+const searchInput = document.getElementById("search-input");
+
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase().trim();
+  const resultados = datosPokemones.filter(poke => {
+    const nameMatch = poke.nombre.toLowerCase().includes(query);
+    const typeMatch = poke.tipo.some(t => t.toLowerCase().includes(query));
+    return nameMatch || typeMatch;
+  });
+  renderizarTarjetas(resultados);
+});
+
+function renderizarTarjetas(lista) {
+  const cont = document.getElementById("contenido");
+  cont.innerHTML = "";
+  if (lista.length === 0) {
+    cont.innerHTML = `<p>No se encontraron Pokémon para "${searchInput.value}".</p>`;
+    return;
+  }
+  lista.forEach(pokemon => {
+    const tarjeta = document.createElement("div");
+    tarjeta.classList.add("tarjeta-pokemon");
+    tarjeta.innerHTML = `
+      <h2>${pokemon.nombre} (#${pokemon.id})</h2>
+      <p><strong>Tipo:</strong> ${pokemon.tipo.join(" / ")}</p>
+      <p><strong>Descripción:</strong> ${pokemon.descripcion}</p>
+      <img src="${pokemon.imagen}" alt="${pokemon.nombre}">
+    `;
+    cont.appendChild(tarjeta);
+  });
+}
+
   })
   .catch(error => {
     console.error("Error al cargar los datos:", error);
@@ -58,7 +83,7 @@ document.addEventListener("click", function (e) {
   const pokemon = datosPokemones.find(p => p.id === id);
   if (!pokemon) return;
 
-  // Buscamos contenedor según data-linea y data-ficha
+ 
   const linea = etapaClickeada.closest(".linea-evolutiva");
   const nombreLinea = linea.dataset.linea;
   const contenedorFicha = document.querySelector(
