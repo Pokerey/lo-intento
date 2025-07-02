@@ -4,11 +4,9 @@ fetch('pokedex/datos-pokedex.json')
   .then(pokemones => {
     const contenedor = document.getElementById("contenido");
     contenedor.innerHTML = ''; // Limpiar contenido
-
     pokemones.forEach(pokemon => {
       const tarjeta = document.createElement("div");
       tarjeta.classList.add("tarjeta-pokemon");
-
       tarjeta.innerHTML = `
         <h2>${pokemon.nombre} (#${pokemon.id})</h2>
         <p><strong>Tipo:</strong> ${pokemon.tipo.join(" / ")}</p>
@@ -19,7 +17,6 @@ fetch('pokedex/datos-pokedex.json')
         <p><strong>Habilidades:</strong> ${pokemon.habilidades.join(", ")}</p>
         <img src="${pokemon.imagen}" alt="${pokemon.nombre}" width="200" />
       `;
-
       contenedor.appendChild(tarjeta);
     });
   .catch(error => {
