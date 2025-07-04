@@ -1,100 +1,94 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Urupokedex</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="sprites/logo-urupokedex.png" type="image/png" />
-</head>
-<body>
+document.addEventListener("DOMContentLoaded", () => {
+  const splash = document.getElementById("splash");
+  const mainContent = document.getElementById("main-content");
+  const abrirBtn = document.getElementById("abrir-btn");
+  const searchInput = document.getElementById("search-input");
+  let datosPokemones = [];
 
-  <!-- Splash screen -->
-  <div id="splash">
-    <img
-      src="sprites/logo-urupokedex.png"
-      alt="Logo Urupokedex"
-      id="splash-logo"
-    />
-    <h1>Bienvenido a la Urupokedex</h1>
-    <p>Cargando la aventura…</p>
-    <button id="abrir-btn">Abrir Pokédex</button>
-  </div>
+  function dismissSplash() {
+    console.log("▶ dismissSplash ejecutado");
+    splash.classList.add("fade-out");
+    setTimeout(() => {
+      splash.style.display = "none";
+      mainContent.classList.remove("hidden");
+    }, 800);
+  }
 
-  <!-- Contenido principal oculto hasta que desaparezca el splash -->
-  <main id="main-content" class="hidden">
-    <h1>🌟 Urupokedex</h1>
+  if (abrirBtn) {
+    abrirBtn.addEventListener("click", () => {
+      console.log("✅ Botón clickeado");
+      dismissSplash();
+    });
+  }
 
-    <!-- Buscador -->
-    <div class="buscador">
-      <input
-        type="search"
-        id="search-input"
-        placeholder="Buscar Pokémon..."
-      />
-    </div>
+  fetch("pokedex/datos-pokedex.json")
+    .then(res => res.json())
+    .then(data => {
+      datosPokemones = data;
+      renderizarTarjetas(datosPokemones);
+    })
+    .catch(() => {
+      document.getElementById("contenido").innerText =
+        "Error al cargar los datos del Pokédex.";
+    });
 
-    <!-- Contenedor para las tarjetas -->
-    <div id="contenido"></div>
+  if (searchInput) {
+    searchInput.addEventListener("input", () => {
+      const q = searchInput.value.toLowerCase().trim();
+      const resultados = datosPokemones.filter(p =>
+        p.nombre.toLowerCase().includes(q) ||
+        p.tipo.some(t => t.toLowerCase().includes(q))
+      );
+      renderizarTarjetas(resultados);
+    });
+  }
 
-     <h2>Línea evolutiva: Inicial Planta</h2>
-    <div class="linea-evolutiva" data-linea="planta">
-      <div class="etapa" data-id="1">
-        <img src="sprites/capihoja.png" alt="Capihoja" />
-        <p>Capihoja</p>
-      </div>
-      <div class="flecha">➜</div>
-      <div class="etapa" data-id="2">
-        <img src="sprites/carpinflo.png" alt="Carpinflo" />
-        <p>Carpinflo</p>
-      </div>
-      <div class="flecha">➜</div>
-      <div class="etapa" data-id="3">
-        <img src="sprites/brotibara.png" alt="Brotibara" />
-        <p>Brotibara</p>
-      </div>
-    </div>
-    <div class="ficha-evolutiva" data-ficha="planta"></div>
+  function renderizarTarjetas(lista) {
+    const cont = document.getElementById("contenido");
+    cont.innerHTML = "";
 
-    <h2>Línea evolutiva: Inicial Agua</h2>
-    <div class="linea-evolutiva" data-linea="agua">
-      <div class="etapa" data-id="4">
-        <img src="sprites/lobazul.png" alt="Lobazul" />
-        <p>Lobazul</p>
-      </div>
-      <div class="flecha">➜</div>
-      <div class="etapa" data-id="5">
-        <img src="sprites/sonatlon.png" alt="Sonatlón" />
-        <p>Sonatlón</p>
-      </div>
-      <div class="flecha">➜</div>
-      <div class="etapa" data-id="6">
-        <img src="sprites/brumalion.png" alt="Brumalión" />
-        <p>Brumalión</p>
-      </div>
-    </div>
-    <div class="ficha-evolutiva" data-ficha="agua"></div>
+    if (!lista.length) {
+      cont.innerHTML = `<p>No se encontraron Pokémon para "${searchInput.value}".</p>`;
+      return;
+    }
 
-    <h2>Línea evolutiva: Inicial Fuego</h2>
-    <div class="linea-evolutiva" data-linea="fuego">
-      <div class="etapa" data-id="7">
-        <img src="sprites/terrero.png" alt="Terrero" />
-        <p>Terrero</p>
-      </div>
-      <div class="flecha">➜</div>
-      <div class="etapa" data-id="8">
-        <img src="sprites/ignivalo.png" alt="Ignívalo" />
-        <p>Ignívalo</p>
-      </div>
-      <div class="flecha">➜</div>
-      <div class="etapa" data-id="9">
-        <img src="sprites/albanix.png" alt="Albanix" />
-        <p>Albanix</p>
-      </div>
-    </div>
-    <div class="ficha-evolutiva" data-ficha="fuego"></div>
-</main>
-  <!-- Enlace al script -->
-  <script src="scripts/main.js"></script>
-</body>
-</html>
+    lista.forEach(pokemon => {
+      const tarjeta = document.createElement("div");
+      tarjeta.className = "tarjeta-pokemon";
+      tarjeta.innerHTML = `
+        <h2>${pokemon.nombre} (#${pokemon.id})</h2>
+        <p><strong>Tipo:</strong> ${pokemon.tipo.join(" / ")}</p>
+        <p><strong>Altura:</strong> ${pokemon.altura}</p>
+        <p><strong>Peso:</strong> ${pokemon.peso}</p>
+        <p><strong>Hábitat:</strong> ${pokemon.habitat}</p>
+        <p><strong>Habilidades:</strong> ${pokemon.habilidades.join(" / ")}</p>
+        <p><strong>Evolución:</strong> ${pokemon.evolucion ? pokemon.evolucion : "Ninguna"}</p>
+        <p>${pokemon.descripcion}</p>
+        <img src="${pokemon.imagen}" alt="${pokemon.nombre}">
+      `;
+      cont.appendChild(tarjeta);
+    });
+  }
+
+  document.addEventListener("click", e => {
+    const etapa = e.target.closest(".etapa");
+    if (!etapa) return;
+
+    const id = Number(etapa.dataset.id);
+    const poke = datosPokemones.find(p => p.id === id);
+    if (!poke) return;
+
+    const fichaName = etapa.closest(".linea-evolutiva").dataset.linea;
+    const fichaCont = document.querySelector(
+      `.ficha-evolutiva[data-ficha="${fichaName}"]`
+    );
+
+    fichaCont.innerHTML = `
+      <div class="tarjeta-pokemon">
+        <h2>${poke.nombre} (#${poke.id})</h2>
+        <p><strong>Tipo:</strong> ${poke.tipo.join(" / ")}</p>
+        <p><strong>Altura:</strong> ${poke.altura}</p>
+        <p><strong>Peso:</strong> ${poke.peso}</p>
+        <p><strong>Hábitat:</strong> ${poke.habitat}</p>
+        <p><strong>Habilidades:</strong> ${poke.habilidades.join(" / ")}</p>
+        <p><strong>Evolución:</strong> ${poke.evolucion ?
