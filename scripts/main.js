@@ -5,9 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("search-input");
   let datosPokemones = [];
 
-  // Oculta el splash y muestra el contenido principal
   function dismissSplash() {
-    console.log("▶ dismissSplash ha sido invocado");
+    console.log("▶ dismissSplash ejecutado");
     splash.classList.add("fade-out");
     setTimeout(() => {
       splash.style.display = "none";
@@ -16,10 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (abrirBtn) {
-    abrirBtn.addEventListener("click", dismissSplash);
+    abrirBtn.addEventListener("click", () => {
+      console.log("✅ Botón clickeado");
+      dismissSplash();
+    });
   }
 
-  // Carga JSON de la Pokédex
   fetch("pokedex/datos-pokedex.json")
     .then(res => res.json())
     .then(data => {
@@ -31,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
         "Error al cargar los datos del Pokédex.";
     });
 
-  // Filtro de búsqueda
   if (searchInput) {
     searchInput.addEventListener("input", () => {
       const q = searchInput.value.toLowerCase().trim();
@@ -43,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Renderiza las tarjetas en la sección principal
   function renderizarTarjetas(lista) {
     const cont = document.getElementById("contenido");
     cont.innerHTML = "";
@@ -71,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Renderiza ficha cuando se hace clic en una etapa evolutiva
   document.addEventListener("click", e => {
     const etapa = e.target.closest(".etapa");
     if (!etapa) return;
