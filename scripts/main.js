@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const splash      = document.getElementById("splash");
   const mainContent = document.getElementById("main-content");
   const abrirBtn    = document.getElementById("abrir-btn");
+  console.log("¿Encontró el botón?:", abrirBtn);
   const searchInput = document.getElementById("search-input");
   let datosPokemones = [];
 
