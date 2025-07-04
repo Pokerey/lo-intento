@@ -2,11 +2,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const splash      = document.getElementById("splash");
   const mainContent = document.getElementById("main-content");
   const searchInput = document.getElementById("search-input");
+  const abrirBtn = document.getElementById("abrir-btn");
+if (abrirBtn) {
+  abrirBtn.addEventListener("click", dismissSplash);
+}
   let datosPokemones = [];
-  // justo después de obtener `splash`
-console.log("Splash cargado:", splash);
-splash.addEventListener("click", () => {
-  console.log("¡Splash clickeado!");
+  abrirBtn.addEventListener("click", () => {
+  console.log("¡Botón abrir clickeado!");
   dismissSplash();
 });
 
