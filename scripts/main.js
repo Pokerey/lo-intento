@@ -2,12 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const splash      = document.getElementById("splash");
   const mainContent = document.getElementById("main-content");
   const abrirBtn    = document.getElementById("abrir-btn");
-  console.log("¿Encontró el botón?:", abrirBtn);
   const searchInput = document.getElementById("search-input");
   let datosPokemones = [];
 
-  // Función para ocultar splash y mostrar contenido
+  // Oculta el splash y muestra el contenido principal
   function dismissSplash() {
+    console.log("▶ dismissSplash ha sido invocado");
     splash.classList.add("fade-out");
     setTimeout(() => {
       splash.style.display = "none";
@@ -15,12 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 800);
   }
 
-  // Listener para el botón "Abrir Pokédex"
   if (abrirBtn) {
     abrirBtn.addEventListener("click", dismissSplash);
   }
 
-  // Carga de datos y renderizado
+  // Carga JSON de la Pokédex
   fetch("pokedex/datos-pokedex.json")
     .then(res => res.json())
     .then(data => {
@@ -28,11 +27,11 @@ document.addEventListener("DOMContentLoaded", () => {
       renderizarTarjetas(datosPokemones);
     })
     .catch(() => {
-      document.getElementById("contenido")
-              .innerText = "Error al cargar los datos del Pokédex.";
+      document.getElementById("contenido").innerText =
+        "Error al cargar los datos del Pokédex.";
     });
 
-  // Filtrado de búsqueda
+  // Filtro de búsqueda
   if (searchInput) {
     searchInput.addEventListener("input", () => {
       const q = searchInput.value.toLowerCase().trim();
@@ -44,32 +43,39 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Renderiza las tarjetas en #contenido
+  // Renderiza las tarjetas en la sección principal
   function renderizarTarjetas(lista) {
     const cont = document.getElementById("contenido");
     cont.innerHTML = "";
+
     if (!lista.length) {
       cont.innerHTML = `<p>No se encontraron Pokémon para "${searchInput.value}".</p>`;
       return;
     }
-    lista.forEach(poke => {
-      const { id, nombre, tipo, descripcion, imagen } = poke;
+
+    lista.forEach(pokemon => {
       const tarjeta = document.createElement("div");
       tarjeta.className = "tarjeta-pokemon";
       tarjeta.innerHTML = `
-        <h2>${nombre} (#${id})</h2>
-        <p><strong>Tipo:</strong> ${tipo.join(" / ")}</p>
-        <p>${descripcion}</p>
-        <img src="${imagen}" alt="${nombre}">
+        <h2>${pokemon.nombre} (#${pokemon.id})</h2>
+        <p><strong>Tipo:</strong> ${pokemon.tipo.join(" / ")}</p>
+        <p><strong>Altura:</strong> ${pokemon.altura}</p>
+        <p><strong>Peso:</strong> ${pokemon.peso}</p>
+        <p><strong>Hábitat:</strong> ${pokemon.habitat}</p>
+        <p><strong>Habilidades:</strong> ${pokemon.habilidades.join(" / ")}</p>
+        <p><strong>Evolución:</strong> ${pokemon.evolucion ? pokemon.evolucion : "Ninguna"}</p>
+        <p>${pokemon.descripcion}</p>
+        <img src="${pokemon.imagen}" alt="${pokemon.nombre}">
       `;
       cont.appendChild(tarjeta);
     });
   }
 
-  // Maneja clics en evoluciones
+  // Renderiza ficha cuando se hace clic en una etapa evolutiva
   document.addEventListener("click", e => {
     const etapa = e.target.closest(".etapa");
     if (!etapa) return;
+
     const id = Number(etapa.dataset.id);
     const poke = datosPokemones.find(p => p.id === id);
     if (!poke) return;
@@ -81,17 +87,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     fichaCont.innerHTML = `
       <div class="tarjeta-pokemon">
-        tarjeta.innerHTML = `
-  <h2>${pokemon.nombre} (#${pokemon.id})</h2>
-  <p><strong>Tipo:</strong> ${pokemon.tipo.join(" / ")}</p>
-  <p><strong>Altura:</strong> ${pokemon.altura}</p>
-  <p><strong>Peso:</strong> ${pokemon.peso}</p>
-  <p><strong>Hábitat:</strong> ${pokemon.habitat}</p>
-  <p><strong>Habilidades:</strong> ${pokemon.habilidades.join(" / ")}</p>
-  <p><strong>Evolución:</strong> ${pokemon.evolucion ? pokemon.evolucion : "Ninguna"}</p>
-  <p>${pokemon.descripcion}</p>
-  <img src="${pokemon.imagen}" alt="${pokemon.nombre}">
- </div>
+        <h2>${poke.nombre} (#${poke.id})</h2>
+        <p><strong>Tipo:</strong> ${poke.tipo.join(" / ")}</p>
+        <p><strong>Altura:</strong> ${poke.altura}</p>
+        <p><strong>Peso:</strong> ${poke.peso}</p>
+        <p><strong>Hábitat:</strong> ${poke.habitat}</p>
+        <p><strong>Habilidades:</strong> ${poke.habilidades.join(" / ")}</p>
+        <p><strong>Evolución:</strong> ${poke.evolucion ? poke.evolucion : "Ninguna"}</p>
+        <p>${poke.descripcion}</p>
+        <img src="${poke.imagen}" alt="${poke.nombre}">
+      </div>
     `;
   });
 });
