@@ -20,9 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
     abrirBtn.addEventListener("click", dismissSplash);
   }
 
-  // Auto-dismiss tras 1.5s
-  setTimeout(dismissSplash, 1500);
-
   // Carga de datos y renderizado
   fetch("pokedex/datos-pokedex.json")
     .then(res => res.json())
