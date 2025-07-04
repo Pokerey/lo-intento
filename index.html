@@ -5,20 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Urupokedex</title>
   <link rel="stylesheet" href="style.css" />
-  <link
-    rel="icon"
-    href="sprites/logo-urupokedex.png"
-    type="image/png"
-  />
+  <link rel="icon" href="sprites/logo-urupokedex.png" type="image/png" />
 </head>
 <body>
+
   <!-- Splash screen -->
   <div id="splash">
     <img
       src="sprites/logo-urupokedex.png"
       alt="Logo Urupokedex"
       id="splash-logo"
-      />
+    />
     <h1>Bienvenido a la Urupokedex</h1>
     <p>Cargando la aventura…</p>
     <button id="abrir-btn">Abrir Pokédex</button>
@@ -28,7 +25,19 @@
   <main id="main-content" class="hidden">
     <h1>🌟 Urupokedex</h1>
 
-    <h2>Línea evolutiva: Inicial Planta</h2>
+    <!-- Buscador -->
+    <div class="buscador">
+      <input
+        type="search"
+        id="search-input"
+        placeholder="Buscar Pokémon..."
+      />
+    </div>
+
+    <!-- Contenedor para las tarjetas -->
+    <div id="contenido"></div>
+
+     <h2>Línea evolutiva: Inicial Planta</h2>
     <div class="linea-evolutiva" data-linea="planta">
       <div class="etapa" data-id="1">
         <img src="sprites/capihoja.png" alt="Capihoja" />
@@ -84,3 +93,8 @@
       </div>
     </div>
     <div class="ficha-evolutiva" data-ficha="fuego"></div>
+</main>
+  <!-- Enlace al script -->
+  <script src="scripts/main.js"></script>
+</body>
+</html>
