@@ -138,4 +138,22 @@ h2 {
   background: rgba(0, 0, 0, 0.5); /* semitransparente para verlo */
   pointer-events: all !important; /* forzamos que reciba clics */
 }
+#abrir-btn {
+  margin-top: 1.5rem;
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  background-color: #d32f2f;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+#abrir-btn:hover {
+  background-color: #b71c1c;
+}
+
 
