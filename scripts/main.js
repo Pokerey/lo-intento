@@ -6,12 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
 if (abrirBtn) {
   abrirBtn.addEventListener("click", dismissSplash);
 }
-  let datosPokemones = [];
-  abrirBtn.addEventListener("click", () => {
-  console.log("¡Botón abrir clickeado!");
-  dismissSplash();
-});
-
   function dismissSplash() {
     splash.classList.add("fade-out");
     splash.addEventListener("transitionend", () => {
@@ -19,6 +13,11 @@ if (abrirBtn) {
       mainContent.classList.remove("hidden");
     }, { once: true });
   }
+  let datosPokemones = [];
+  abrirBtn.addEventListener("click", () => {
+  console.log("¡Botón abrir clickeado!");
+  dismissSplash();
+});
 
   setTimeout(dismissSplash, 1500);
   splash.addEventListener("click", dismissSplash);
