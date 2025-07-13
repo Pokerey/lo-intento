@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <p><strong>Habilidades:</strong> ${pokemon.habilidades.join(" / ")}</p>
         <p><strong>Evolución:</strong> ${pokemon.evolucion ? pokemon.evolucion : "Ninguna"}</p>
         <p>${pokemon.descripcion}</p>
-        <img src="${pokemon.imagen}" alt="${pokemon.nombre}">
+        <img src="https://pokerey.github.io/Def.-Pokedex-uru/${pokemon.imagen}" alt="${pokemon.nombre}">
       `;
       cont.appendChild(tarjeta);
     });
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <p><strong>Habilidades:</strong> ${poke.habilidades.join(" / ")}</p>
         <p><strong>Evolución:</strong> ${poke.evolucion ? poke.evolucion : "Ninguna"}</p>
         <p>${poke.descripcion}</p>
-        <img src="${poke.imagen}" alt="${poke.nombre}">
+        <img src="https://pokerey.github.io/Def.-Pokedex-uru/${poke.imagen}" alt="${poke.nombre}">
       </div>
     `;
   });
