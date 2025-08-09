@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <p><strong>Habilidades:</strong> ${poke.habilidades.join(" / ")}</p>
         <p><strong>Evolución:</strong> ${poke.evolucion ? poke.evolucion : "Ninguna"}</p>
         <p>${poke.descripcion}</p>
-        <img src="https://pokerey.github.io/Def.-Pokedex-uru/${poke.imagen}" alt="${poke.nombre}">
+           <img src="https://pokerey.github.io/Def.-Pokedex-uru/${poke.imagen}" alt="${poke.nombre}">
       </div>
     `;
   });
