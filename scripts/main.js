@@ -52,22 +52,28 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    lista.forEach(pokemon => {
-      const tarjeta = document.createElement("div");
-      tarjeta.className = "tarjeta-pokemon";
-      tarjeta.innerHTML = `
-        <h2>${pokemon.nombre} (#${pokemon.id})</h2>
-        <p><strong>Tipo:</strong> ${pokemon.tipo.join(" / ")}</p>
-        <p><strong>Altura:</strong> ${pokemon.altura}</p>
-        <p><strong>Peso:</strong> ${pokemon.peso}</p>
-        <p><strong>Hábitat:</strong> ${pokemon.habitat}</p>
-        <p><strong>Habilidades:</strong> ${pokemon.habilidades.join(" / ")}</p>
-        <p><strong>Evolución:</strong> ${pokemon.evolucion ? pokemon.evolucion : "Ninguna"}</p>
-        <p>${pokemon.descripcion}</p>
-        <img src="https://pokerey.github.io/Def.-Pokedex-uru/${pokemon.imagen}" alt="${pokemon.nombre}">
-      `;
-      cont.appendChild(tarjeta);
-    });
+   lista.forEach(pokemon => {
+  const tarjeta = document.createElement("div");
+  tarjeta.className = "tarjeta-pokemon";
+
+  tarjeta.innerHTML = `
+    <h2>${pokemon.nombre} (#${pokemon.id})</h2>
+    <p><strong>Tipo:</strong> ${pokemon.tipo.join(" / ")}</p>
+    <p><strong>Altura:</strong> ${pokemon.altura}</p>
+    <p><strong>Peso:</strong> ${pokemon.peso}</p>
+    <p><strong>Hábitat:</strong> ${pokemon.habitat}</p>
+    <p><strong>Habilidades:</strong> ${pokemon.habilidades.join(" / ")}</p>
+    <p><strong>Evolución:</strong> ${pokemon.evolucion || "Ninguna"}</p>
+    <p>${pokemon.descripcion}</p>
+    <img
+      src="${pokemon.imagen}"
+      alt="${pokemon.nombre}"
+      loading="lazy"
+    />
+  `;
+  cont.appendChild(tarjeta);
+});
+
   }
 
   document.addEventListener("click", e => {
