@@ -1,95 +1,26 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const splash = document.getElementById("splash");
-  const mainContent = document.getElementById("main-content");
-  const abrirBtn = document.getElementById("abrir-btn");
-  const searchInput = document.getElementById("search-input");
-  let datosPokemones = [];
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pokédex Uruguaya</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="splash">
+    <img id="splash-logo" src="sprites/capihoja.png" alt="Logo Pokédex" />
+    <button id="abrir-btn">Entrar</button>
+  </div>
 
-  function dismissSplash() {
-    console.log("▶ dismissSplash ejecutado");
-    splash.classList.add("fade-out");
-    setTimeout(() => {
-      splash.style.display = "none";
-      mainContent.classList.remove("hidden");
-    }, 800);
-  }
+  <main id="main-content" class="hidden">
+    <h1>Pokédex Regional Uruguaya</h1>
+    <div class="buscador">
+      <input type="text" id="search-input" placeholder="Buscar Pokémon..." />
+      <button id="probar-btn">Probar renderizado</button>
+    </div>
+    <div id="contenido"></div>
+  </main>
 
-  if (abrirBtn) {
-    abrirBtn.addEventListener("click", () => {
-      console.log("✅ Botón clickeado");
-      dismissSplash();
-    });
-  }
-
-  fetch("pokedex/datos-pokedex.json")
-    .then(res => res.json())
-    .then(data => {
-      datosPokemones = data;
-      renderizarTarjetas(datosPokemones);
-    })
-    .catch(() => {
-      document.getElementById("contenido").innerText =
-        "Error al cargar los datos del Pokédex.";
-    });
-
-  if (searchInput) {
-    searchInput.addEventListener("input", () => {
-      const q = searchInput.value.toLowerCase().trim();
-      const resultados = datosPokemones.filter(p =>
-        p.nombre.toLowerCase().includes(q) ||
-        p.tipo.some(t => t.toLowerCase().includes(q))
-      );
-      renderizarTarjetas(resultados);
-<button id="probar-btn">Probar renderizado</button>
-    });
-  }
-
-  function renderizarTarjetas(lista) {
-    const cont = document.getElementById("contenido");
-    cont.innerHTML = "";
-
-    if (!lista.length) {
-      cont.innerHTML = `<p>No se encontraron Pokémon para "${searchInput.value}".</p>`;
-      return;
-    }
-
-    lista.forEach(pokemon => {
-  const tarjeta = document.createElement("div");
-  tarjeta.className = "tarjeta-pokemon";
-  tarjeta.innerHTML = `
-    <h2>${pokemon.nombre} (#${pokemon.id})</h2>
-    <p><strong>Tipo:</strong> ${pokemon.tipo.join(" / ")}</p>
-    <p><strong>Altura:</strong> ${pokemon.altura}</p>
-    <p><strong>Peso:</strong> ${pokemon.peso}</p>
-    <p><strong>Hábitat:</strong> ${pokemon.habitat}</p>
-    <p><strong>Habilidades:</strong> ${pokemon.habilidades.join(" / ")}</p>
-    <p><strong>Evolución:</strong> ${pokemon.evolucion ? pokemon.evolucion : "Ninguna"}</p>
-    <p>${pokemon.descripcion}</p>
-   <img src="https://pokerey.github.io/lo-intento/${pokemon.imagen}" alt="${pokemon.nombre}">
-  `;
-      cont.appendChild(tarjeta);
-    });
-  }
-
-  document.addEventListener("click", e => {
-    const etapa = e.target.closest(".etapa");
-    if (!etapa) return;
-
-    const id = Number(etapa.dataset.id);
-    const poke = datosPokemones.find(p => p.id === id);
-    if (!poke) return;
-
-    const fichaName = etapa.closest(".linea-evolutiva").dataset.linea;
-    const fichaCont = document.querySelector(
-      `.ficha-evolutiva[data-ficha="${fichaName}"]`
-    );
-
-    fichaCont.innerHTML = `
-      <div class="tarjeta-pokemon">
-        <h2>${poke.nombre} (#${poke.id})</h2>
-        <p><strong>Tipo:</strong> ${poke.tipo.join(" / ")}</p>
-        <p><strong>Altura:</strong> ${poke.altura}</p>
-        <p><strong>Peso:</strong> ${poke.peso}</p>
-        <p><strong>Hábitat:</strong> ${poke.habitat}</p>
-        <p><strong>Habilidades:</strong> ${poke.habilidades.join(" / ")}</p>
-        <p><strong>Evolución:</strong> ${poke.evolucion ?
+  <script src="scripts/main.js" defer></script>
+</body>
+</html>
