@@ -79,7 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
           src="https://pokerey.github.io/Def.-Pokedex-uru/${pokemon.imagen}"
           alt="${pokemon.nombre}"
           loading="lazy"
-          onerror="this.src='https://pokerey.github.io/Def.-Pokedex-uru/sprites/default.png'"
         />
       `;
       cont.appendChild(tarjeta);
@@ -112,7 +111,6 @@ document.addEventListener("DOMContentLoaded", () => {
         <img
           src="https://pokerey.github.io/Def.-Pokedex-uru/${poke.imagen}"
           alt="${poke.nombre}"
-          onerror="this.src='https://pokerey.github.io/Def.-Pokedex-uru/sprites/default.png'"
         />
       </div>
     `;
