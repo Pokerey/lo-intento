@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const mainContent = document.getElementById("main-content");
   const abrirBtn    = document.getElementById("abrir-btn");
   const searchInput = document.getElementById("search-input");
+  const probarBtn   = document.getElementById("probar-btn");
   let datosPokemones = [];
 
   function dismissSplash() {
@@ -43,6 +44,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  if (probarBtn) {
+    probarBtn.addEventListener("click", () => {
+      console.log("🧪 Botón de prueba presionado");
+      renderizarTarjetas(datosPokemones);
+    });
+  }
+
   function renderizarTarjetas(lista) {
     const cont = document.getElementById("contenido");
     cont.innerHTML = "";
@@ -52,28 +60,30 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-   lista.forEach(pokemon => {
-  const tarjeta = document.createElement("div");
-  tarjeta.className = "tarjeta-pokemon";
+    lista.forEach(pokemon => {
+      console.log("🔍 URL de imagen:", `https://pokerey.github.io/Def.-Pokedex-uru/${pokemon.imagen}`);
 
-  tarjeta.innerHTML = `
-    <h2>${pokemon.nombre} (#${pokemon.id})</h2>
-    <p><strong>Tipo:</strong> ${pokemon.tipo.join(" / ")}</p>
-    <p><strong>Altura:</strong> ${pokemon.altura}</p>
-    <p><strong>Peso:</strong> ${pokemon.peso}</p>
-    <p><strong>Hábitat:</strong> ${pokemon.habitat}</p>
-    <p><strong>Habilidades:</strong> ${pokemon.habilidades.join(" / ")}</p>
-    <p><strong>Evolución:</strong> ${pokemon.evolucion || "Ninguna"}</p>
-    <p>${pokemon.descripcion}</p>
-    <img
-      src="${pokemon.imagen}"
-      alt="${pokemon.nombre}"
-      loading="lazy"
-    />
-  `;
-  cont.appendChild(tarjeta);
-});
+      const tarjeta = document.createElement("div");
+      tarjeta.className = "tarjeta-pokemon";
 
+      tarjeta.innerHTML = `
+        <h2>${pokemon.nombre} (#${pokemon.id})</h2>
+        <p><strong>Tipo:</strong> ${pokemon.tipo.join(" / ")}</p>
+        <p><strong>Altura:</strong> ${pokemon.altura}</p>
+        <p><strong>Peso:</strong> ${pokemon.peso}</p>
+        <p><strong>Hábitat:</strong> ${pokemon.habitat}</p>
+        <p><strong>Habilidades:</strong> ${pokemon.habilidades.join(" / ")}</p>
+        <p><strong>Evolución:</strong> ${pokemon.evolucion || "Ninguna"}</p>
+        <p>${pokemon.descripcion}</p>
+        <img
+          src="https://pokerey.github.io/Def.-Pokedex-uru/${pokemon.imagen}"
+          alt="${pokemon.nombre}"
+          loading="lazy"
+          onerror="this.src='https://pokerey.github.io/Def.-Pokedex-uru/sprites/default.png'"
+        />
+      `;
+      cont.appendChild(tarjeta);
+    });
   }
 
   document.addEventListener("click", e => {
@@ -97,9 +107,13 @@ document.addEventListener("DOMContentLoaded", () => {
         <p><strong>Peso:</strong> ${poke.peso}</p>
         <p><strong>Hábitat:</strong> ${poke.habitat}</p>
         <p><strong>Habilidades:</strong> ${poke.habilidades.join(" / ")}</p>
-        <p><strong>Evolución:</strong> ${poke.evolucion ? poke.evolucion : "Ninguna"}</p>
+        <p><strong>Evolución:</strong> ${poke.evolucion || "Ninguna"}</p>
         <p>${poke.descripcion}</p>
-           <img src="https://pokerey.github.io/Def.-Pokedex-uru/${poke.imagen}" alt="${poke.nombre}">
+        <img
+          src="https://pokerey.github.io/Def.-Pokedex-uru/${poke.imagen}"
+          alt="${poke.nombre}"
+          onerror="this.src='https://pokerey.github.io/Def.-Pokedex-uru/sprites/default.png'"
+        />
       </div>
     `;
   });
