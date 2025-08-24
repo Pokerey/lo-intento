@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     lista.forEach(pokemon => {
-      console.log("🔍 URL de imagen:", `https://pokerey.github.io/Def.-Pokedex-uru/${pokemon.imagen}`);
+      console.log("🔍 URL de imagen:", `https://pokerey.github.io/lo-intento/${pokemon.imagen}`);
 
       const tarjeta = document.createElement("div");
       tarjeta.className = "tarjeta-pokemon";
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <p><strong>Evolución:</strong> ${pokemon.evolucion || "Ninguna"}</p>
         <p>${pokemon.descripcion}</p>
         <img
-          src="https://pokerey.github.io/Def.-Pokedex-uru/${pokemon.imagen}"
+          src="https://pokerey.github.io/lo-intento/${pokemon.imagen}"
           alt="${pokemon.nombre}"
           loading="lazy"
         />
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <p><strong>Evolución:</strong> ${poke.evolucion || "Ninguna"}</p>
         <p>${poke.descripcion}</p>
         <img
-          src="https://pokerey.github.io/Def.-Pokedex-uru/${poke.imagen}"
+          src="https://pokerey.github.io/lo-intento/${poke.imagen}"
           alt="${poke.nombre}"
         />
       </div>
