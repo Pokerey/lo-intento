@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <p><strong>Habilidades:</strong> ${pokemon.habilidades.join(" / ")}</p>
     <p><strong>Evolución:</strong> ${pokemon.evolucion ? pokemon.evolucion : "Ninguna"}</p>
     <p>${pokemon.descripcion}</p>
-    <img src="https://pokerey.github.io/lo-intento/${pokemon.imagen}" alt="${pokemon.nombre}">
+   <img src="https://pokerey.github.io/lo-intento/${pokemon.imagen}" alt="${pokemon.nombre}" onerror="this.src='fallback.png'">
   `;
       cont.appendChild(tarjeta);
     });
