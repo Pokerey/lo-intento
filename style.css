@@ -17,7 +17,10 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(135deg, #ffe0b2, #bbdefb);
+  background-image: url("sprites/fondo-inicio.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,6 +29,7 @@ body {
   opacity: 1;
   transition: opacity 0.8s ease;
 }
+
 
 #splash-logo {
   width: 250px;
