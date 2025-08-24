@@ -6,4 +6,4 @@ Def.-Pokedex-uru/
 ├── pokedex/
 │   └── datos-pokedex.json
 ├── sprites/
-
+│   └── (todas tus imágenes .png)
